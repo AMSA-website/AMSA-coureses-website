@@ -1,11 +1,15 @@
-
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose=require('mongoose');
 const app = express();
+const router = express.Router();
+
+const branchesRoutes = require('./controller/branches')
+const citiesRoutes = require('./controller/cities')
+
+
 const MONGODB_URI='mongodb+srv://AMSA:AMSApassword@cluster0-y8dzc.mongodb.net/AMSAdb?retryWrites=true&w=majority'
-
-
 mongoose.connect(
     MONGODB_URI,
      {
@@ -22,9 +26,16 @@ mongoose.connect(
      console.log(err);
    });
 
+
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-// app.use("/public", express.static(path.join("public")));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(router);
+app.use("/public", express.static(path.join("public")));
+
+
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -38,3 +49,7 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+
+app.use('/branch', branchesRoutes)
+app.use('/city', citiesRoutes)
