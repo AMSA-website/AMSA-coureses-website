@@ -7,6 +7,8 @@ const router = express.Router();
 
 const branchesRoutes = require('./controller/branches')
 const citiesRoutes = require('./controller/cities')
+const coursesRoutes = require('./controller/courses')
+const categoriesRoutes = require('./controller/categories')
 
 
 const MONGODB_URI='mongodb+srv://AMSA:AMSApassword@cluster0-y8dzc.mongodb.net/AMSAdb?retryWrites=true&w=majority'
@@ -53,3 +55,5 @@ app.use((req, res, next) => {
 
 app.use('/branch', branchesRoutes)
 app.use('/city', citiesRoutes)
+app.use('/category', categoriesRoutes)
+app.use('/course', coursesRoutes)
