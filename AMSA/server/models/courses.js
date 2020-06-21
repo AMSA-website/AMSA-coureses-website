@@ -14,7 +14,7 @@ const courseSchema=new Schema({
     duration:{ type: String, required:true },
     trainers:{ type: [String], required:true },
     category:{ type: Schema.Types.ObjectId, ref:'category'},
-    // learners:[{ type: Schema.Types.ObjectId, ref:'student'}],
+    learners:[{ type: Schema.Types.ObjectId, ref:'student'}],
     reviews:[{ type: Schema.Types.ObjectId, ref:'review'}]
 });
 
