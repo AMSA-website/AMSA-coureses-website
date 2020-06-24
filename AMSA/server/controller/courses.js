@@ -87,7 +87,7 @@ router.get("/ListByBranch/:id", (req, res) => {
 
 // /////////////////////////// get online courses
 router.get("/online", (req, res ) => {
-        Courses.find({type: { $ne:'online' }}).populate({path:'category',select:'name -_id'})
+        Courses.find({type: { $eq:'online' }}).populate({path:'category',select:'name -_id'})
         .then(courses=>{
                 console.log("you got "+courses.length+" courses online")
                 res.status(201).json(courses)   
@@ -115,5 +115,18 @@ router.get("/offline", (req, res ) => {
 //   
 })
 
+// /////////////////////////// get highest learners nom. courses
+/* router.get("/highestLearners", (req, res) => {
+    var a
+    Courses.find().then(courses=>{
+        courses.map(course=>{
+            a=course.learners.length
+            
+        })
+        console.log(a);
+        console.log(typeof(a));
+        res.status(201).json(courses)  
+    })
+}) */
 module.exports = router;
 
