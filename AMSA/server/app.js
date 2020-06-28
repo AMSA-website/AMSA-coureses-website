@@ -9,7 +9,8 @@ const branchesRoutes = require('./controller/branches')
 const citiesRoutes = require('./controller/cities')
 const coursesRoutes = require('./controller/courses')
 const categoriesRoutes = require('./controller/categories')
-
+const reviewsRoutes = require('./controller/reviews')
+const studentsRoutes = require('./controller/students')
 
 const MONGODB_URI='mongodb+srv://AMSA:AMSApassword@cluster0-y8dzc.mongodb.net/AMSAdb?retryWrites=true&w=majority'
 mongoose.connect(
@@ -20,20 +21,13 @@ mongoose.connect(
       }
      )
    .then(result =>{ 
-     app.listen(3000,()=>{
+     app.listen(5000,()=>{
       console.log("server & db connected");
      })
    } )
    .catch(err =>{
      console.log(err);
    });
-
-
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
 app.use(router);
 app.use("/public", express.static(path.join("public")));
 
@@ -57,3 +51,5 @@ app.use('/branch', branchesRoutes)
 app.use('/city', citiesRoutes)
 app.use('/category', categoriesRoutes)
 app.use('/course', coursesRoutes)
+app.use('/api/review', reviewsRoutes)
+app.use('/api/student', studentsRoutes)
